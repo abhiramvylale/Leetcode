@@ -1,25 +1,27 @@
 class Solution:
     def reverse(self, x: int) -> int:
-        -231 <= x <= 231 - 1
-        char = str(x)
-        chars = [i for i in char]
-        new = []
-        
-        if x < 0:
-            chars.pop(0)
+        res = 0
 
-        for i in range(len(chars)-1, -1, -1):
-            new.append(chars[i])
+        sign = 0
         
-        num = int(''.join(new))
-        if x < 0:
-            num = num * -1
+        if x > 0:
+            sign = 1
+        elif x < 0:
+            sign = -1
 
-        if -2**31 <= num <= 2**31 - 1:
-            return num
-        else:
+        x *= sign
+
+        while x != 0:
+            res *= 10
+            res += x % 10
+            x //= 10
+
+        res *= sign
+
+        if res < (-2 ** 31) or res > ((2 ** 31) - 1):
             return 0
-
-
+        else:
+            return res
 
         
+
